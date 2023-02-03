@@ -5,6 +5,8 @@ mvn package -Dmaven.test.skip=true
 ```
 
 ```shell
+https://github.com/taosdata/taos-connector-jdbc/blob/main/README-CN.md
+
 user：登录 TDengine 用户名，默认值 'root'。
 password：用户登录密码，默认值 'taosdata'。
 cfgdir：客户端配置文件目录路径，Linux OS 上默认值 /etc/taos，Windows OS 上默认值 C:/TDengine/cfg。

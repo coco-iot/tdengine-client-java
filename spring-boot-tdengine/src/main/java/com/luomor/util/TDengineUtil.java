@@ -30,6 +30,8 @@ public class TDengineUtil {
 
         # system locale
         # locale                en_US.UTF-8
+
+        INSERT INTO test.t1 USING test.weather (ts, temperature) TAGS('beijing') VALUES (now, 24.6);
      * @return
      * @throws Exception
      */
