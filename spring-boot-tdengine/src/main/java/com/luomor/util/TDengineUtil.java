@@ -14,7 +14,7 @@ public class TDengineUtil {
         Connection conn = DriverManager.getConnection(jdbcUrl);
 
         Class.forName("com.taosdata.jdbc.rs.RestfulDriver");
-        jdbcUrl = "jdbc:TAOS-RS://localhost:6030/test?user=root&password=taosdata";
+        jdbcUrl = "jdbc:TAOS-RS://localhost:6041/test?user=root&password=taosdata";
         conn = DriverManager.getConnection(jdbcUrl);
     }
     
