@@ -79,10 +79,16 @@ public class TDengineUtil {
 
         while(true) {
             ConsumerRecords<ResultBean> records = consumer.poll(Duration.ofMillis(100));
-                for (ResultBean record : records) {
-                    // process(record);
-                }
+            for (ResultBean record : records) {
+                // process(record);
+            }
+            break;
         }
+
+        // 取消订阅
+        consumer.unsubscribe();
+        // 关闭消费
+        consumer.close();
     }
     
     /**
