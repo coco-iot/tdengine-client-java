@@ -3,6 +3,7 @@ package com.luomor.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 import com.taosdata.jdbc.TSDBDriver;
@@ -17,6 +18,17 @@ public class TDengineUtil {
         jdbcUrl = "jdbc:TAOS-RS://localhost:6041/test?user=root&password=taosdata";
         conn = DriverManager.getConnection(jdbcUrl);
         // INSERT INTO test.t1 USING test.weather (ts, temperature) TAGS('beijing') VALUES (now, 24.6);
+
+        Statement stmt = conn.createStatement();
+
+        // create database
+        stmt.executeUpdate("create database if not exists db");
+
+        // use database
+        stmt.executeUpdate("use db");
+
+        // create table
+        stmt.executeUpdate("create table if not exists tb (ts timestamp, temperature int, humidity float)");
     }
     
     /**
