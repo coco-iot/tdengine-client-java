@@ -16,6 +16,7 @@ public class TDengineUtil {
         Class.forName("com.taosdata.jdbc.rs.RestfulDriver");
         jdbcUrl = "jdbc:TAOS-RS://localhost:6041/test?user=root&password=taosdata";
         conn = DriverManager.getConnection(jdbcUrl);
+        // INSERT INTO test.t1 USING test.weather (ts, temperature) TAGS('beijing') VALUES (now, 24.6);
     }
     
     /**
@@ -30,8 +31,6 @@ public class TDengineUtil {
 
         # system locale
         # locale                en_US.UTF-8
-
-        INSERT INTO test.t1 USING test.weather (ts, temperature) TAGS('beijing') VALUES (now, 24.6);
      * @return
      * @throws Exception
      */
@@ -42,6 +41,28 @@ public class TDengineUtil {
         connProps.setProperty(TSDBDriver.PROPERTY_KEY_CHARSET, "UTF-8");
         connProps.setProperty(TSDBDriver.PROPERTY_KEY_LOCALE, "en_US.UTF-8");
         connProps.setProperty(TSDBDriver.PROPERTY_KEY_TIME_ZONE, "UTC-8");
+        Connection conn = DriverManager.getConnection(jdbcUrl, connProps);
+        return conn;
+    }
+
+    public Connection getConn1() throws Exception{
+        Class.forName("com.taosdata.jdbc.TSDBDriver");
+        String jdbcUrl = "jdbc:TAOS://taosdemo.com:6030/test?user=root&password=taosdata";
+        Properties connProps = new Properties();
+        connProps.setProperty(TSDBDriver.PROPERTY_KEY_CHARSET, "UTF-8");
+        connProps.setProperty(TSDBDriver.PROPERTY_KEY_LOCALE, "en_US.UTF-8");
+        connProps.setProperty(TSDBDriver.PROPERTY_KEY_TIME_ZONE, "UTC-8");
+        connProps.setProperty("debugFlag", "135");
+        connProps.setProperty("maxSQLLength", "1048576");
+        Connection conn = DriverManager.getConnection(jdbcUrl, connProps);
+        return conn;
+    }
+      
+    public Connection getRestConn() throws Exception{
+        Class.forName("com.taosdata.jdbc.rs.RestfulDriver");
+        String jdbcUrl = "jdbc:TAOS-RS://taosdemo.com:6041/test?user=root&password=taosdata";
+        Properties connProps = new Properties();
+        connProps.setProperty(TSDBDriver.PROPERTY_KEY_BATCH_LOAD, "true");
         Connection conn = DriverManager.getConnection(jdbcUrl, connProps);
         return conn;
     }
