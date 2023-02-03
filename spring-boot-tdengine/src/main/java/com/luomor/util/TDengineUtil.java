@@ -50,6 +50,18 @@ public class TDengineUtil {
 
             System.out.printf("%s, %d, %s\n", ts, temperature, humidity);
         }
+
+        String sql = "";
+        try (Statement statement = conn.createStatement()) {
+            // executeQuery
+            resultSet = statement.executeQuery(sql);
+            // print result
+            // printResult(resultSet);
+        } catch (SQLException e) {
+            System.out.println("ERROR Message: " + e.getMessage());
+            System.out.println("ERROR Code: " + e.getErrorCode());
+            e.printStackTrace();
+        }
     }
     
     /**
