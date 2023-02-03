@@ -6,9 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.util.Properties;
 
+import com.luomor.bean.ResultBean;
 import com.taosdata.jdbc.TSDBDriver;
+import com.taosdata.jdbc.tmq.ConsumerRecords;
+import com.taosdata.jdbc.tmq.TaosConsumer;
 
 public class TDengineUtil {
     public void test() throws ClassNotFoundException, SQLException {
@@ -65,6 +69,20 @@ public class TDengineUtil {
 
         Statement statement = conn.createStatement();
         statement.executeUpdate("create topic if not exists topic_speed as select ts, speed from speed_table");
+
+        Properties config = new Properties();
+        config.setProperty("enable.auto.commit", "true");
+        config.setProperty("group.id", "group1");
+        config.setProperty("value.deserializer", "com.taosdata.jdbc.tmq.ConsumerTest.ResultDeserializer");
+
+        TaosConsumer consumer = new TaosConsumer<>(config);
+
+        while(true) {
+            ConsumerRecords<ResultBean> records = consumer.poll(Duration.ofMillis(100));
+                for (ResultBean record : records) {
+                    // process(record);
+                }
+        }
     }
     
     /**
