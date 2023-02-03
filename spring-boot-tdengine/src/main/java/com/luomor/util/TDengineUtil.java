@@ -12,6 +12,10 @@ public class TDengineUtil {
         Class.forName("com.taosdata.jdbc.TSDBDriver");
         String jdbcUrl = "jdbc:TAOS://localhost:6030/test?user=root&password=taosdata";
         Connection conn = DriverManager.getConnection(jdbcUrl);
+
+        Class.forName("com.taosdata.jdbc.rs.RestfulDriver");
+        jdbcUrl = "jdbc:TAOS-RS://localhost:6030/test?user=root&password=taosdata";
+        conn = DriverManager.getConnection(jdbcUrl);
     }
     
     /**
