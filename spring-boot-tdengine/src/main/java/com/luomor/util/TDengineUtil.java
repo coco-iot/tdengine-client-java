@@ -62,6 +62,9 @@ public class TDengineUtil {
             System.out.println("ERROR Code: " + e.getErrorCode());
             e.printStackTrace();
         }
+
+        Statement statement = conn.createStatement();
+        statement.executeUpdate("create topic if not exists topic_speed as select ts, speed from speed_table");
     }
     
     /**
