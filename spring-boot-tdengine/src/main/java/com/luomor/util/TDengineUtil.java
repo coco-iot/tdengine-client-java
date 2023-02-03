@@ -2,8 +2,10 @@ package com.luomor.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Properties;
 
 import com.taosdata.jdbc.TSDBDriver;
@@ -29,6 +31,25 @@ public class TDengineUtil {
 
         // create table
         stmt.executeUpdate("create table if not exists tb (ts timestamp, temperature int, humidity float)");
+
+        // insert data
+        int affectedRows = stmt.executeUpdate("insert into tb values(now, 23, 10.3) (now + 1s, 20, 9.3)");
+
+        System.out.println("insert " + affectedRows + " rows.");
+
+        // query data
+        ResultSet resultSet = stmt.executeQuery("select * from tb");
+
+        Timestamp ts = null;
+        int temperature = 0;
+        float humidity = 0;
+        while(resultSet.next()) {
+            ts = resultSet.getTimestamp(1);
+            temperature = resultSet.getInt(2);
+            humidity = resultSet.getFloat("humidity");
+
+            System.out.printf("%s, %d, %s\n", ts, temperature, humidity);
+        }
     }
     
     /**
