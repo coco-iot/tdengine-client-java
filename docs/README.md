@@ -5,6 +5,9 @@ mvn package -Dmaven.test.skip=true
 
 cd springbootdemo
 mvn clean package
+
+http://49.232.6.131:8012/weather/init
+http://49.232.6.131:8012/weather/10/0
 ```
 
 ```shell
