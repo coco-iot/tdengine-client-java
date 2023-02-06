@@ -8,6 +8,7 @@ mvn clean package
 
 http://49.232.6.131:8012/weather/init
 http://49.232.6.131:8012/weather/10/0
+http://49.232.6.131:8012/weather/lastOne
 ```
 
 ```shell
