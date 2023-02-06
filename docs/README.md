@@ -4,7 +4,7 @@ jdbc:[TAOS|TAOS-RS]://[host_name]:[port]/[database_name]?[user={user}|&password=
 mvn package -Dmaven.test.skip=true
 
 cd springbootdemo
-mvn package
+mvn clean package
 ```
 
 ```shell
